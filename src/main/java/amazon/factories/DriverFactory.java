@@ -12,6 +12,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class DriverFactory {
@@ -37,6 +40,10 @@ public class DriverFactory {
         }
     }
 
+    public static void setImplicitWait(WebDriver driver)
+    {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
     private static WebDriver getLocalWebDriver() {
         log.info("Getting driver for browser: {}", BROWSER);
         switch (BROWSER) {
@@ -69,5 +76,9 @@ public class DriverFactory {
             default:
                 throw new IllegalStateException(String.format("%s is not a valid browser choice. Pick your browser from %s.", BROWSER, java.util.Arrays.asList(BROWSER.values())));
         }
+    }
+    public static WebDriverWait getWebDriverWait(WebDriver driver, int time)
+    {
+        return new WebDriverWait(driver, time);
     }
 }
