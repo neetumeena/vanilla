@@ -5,40 +5,23 @@ import amazon.factories.DriverFactory;
 import amazon.factories.PageFactory;
 import com.typesafe.config.Config;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 @Slf4j
 public class AboutThisProductTextPresentTestClass {
 
 
     private static Config config = EnvFactory.getInstance().getConfig();
     private static final String HOME_PAGE_URL = config.getString("HOME_PAGE_URL");
-    private WebDriver driver = DriverFactory.getDriver();
-
-    @Tag("smokeTest")
-    @DisplayName("This test is for demo purpose only to show that the basic code works." +
-            "You have to use the best practices that you normally use to design your tests")
-//    @Test
-    void assertThatHomePageTitleIsCorrect() throws InterruptedException {
-        driver.get(HOME_PAGE_URL);
-        assertEquals("Amazon.com. Spend less. Smile more.", driver.getTitle());
-    }
-
     private final PageFactory pageFactory = new PageFactory();
     AboutThisProductTextPresentHelperClass helperClass = new AboutThisProductTextPresentHelperClass();
+    private WebDriver driver = DriverFactory.getDriver();
 
+
+    @DisplayName("This test is to validate about this product text on product detail page")
     @Test
     void assertAboutThisProductText() throws InterruptedException {
         DriverFactory.setImplicitWait(driver);
@@ -56,9 +39,10 @@ public class AboutThisProductTextPresentTestClass {
             log.info("About this item present");
         }
     }
+
     @AfterEach
-    void quitDriver()
-    {
-        driver.quit();;
+    void quitDriver() {
+        driver.quit();
+        ;
     }
 }
