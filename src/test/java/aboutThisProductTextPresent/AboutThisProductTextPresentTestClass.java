@@ -5,6 +5,8 @@ import amazon.factories.DriverFactory;
 import amazon.factories.PageFactory;
 import com.typesafe.config.Config;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -53,5 +55,10 @@ public class AboutThisProductTextPresentTestClass {
         } else {
             log.info("About this item present");
         }
+    }
+    @AfterEach
+    void quitDriver()
+    {
+        driver.quit();;
     }
 }
